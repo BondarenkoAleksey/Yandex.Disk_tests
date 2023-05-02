@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class AuthPageLocators:
+    LOGIN_TAB = (By.CSS_SELECTOR, 'button[data-type="login"]')
     LOGIN_INPUT = (By.ID, 'passp-field-login')
     PASSWORD_INPUT = (By.ID, 'passp-field-passwd')
     LOGIN_BUTTON = (By.ID, 'passp:sign-in')
