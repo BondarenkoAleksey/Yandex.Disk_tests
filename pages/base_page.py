@@ -23,6 +23,22 @@ class BasePage:
     def page_title(self):
         return driver.title
 
+    def click(self, locator):
+        self.find_element(locator).click()
+
+    def type_text(self, locator, text):
+        element = self.find_element(locator)
+        element.click()
+        element.clear()
+        element.send_keys(text)
+
+    def get_attribute(self, locator, key):
+        element = self.find_element(locator)
+        return element.get_attribute(key)
+
+    def get_text(self, locator):
+        return self.find_element(locator).text
+
     def is_element_present(self, how, what):
         try:
             driver.find_element(how, what)
