@@ -1,7 +1,7 @@
 from pages.base_page import *
 from locators.main_page_locators import *
 from locators.authorization_page_locators import *
-from const.login import *
+from const.const import *
 
 class LoginPage(BasePage):
 
