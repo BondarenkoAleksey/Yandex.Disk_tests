@@ -1,11 +1,15 @@
 import time
-import pytest
 
 from pages.login_page import LoginPage
-from const.login import *
+from pages.main_page import MainPage
+from pages.disk_page import DiskPage
+from const.const import *
+
+login = LoginPage()
+main_page = MainPage()
+disk_page = DiskPage()
 
 def test_login():
-    login = LoginPage()
     login.open_yaru()
     time.sleep(2)
     login.click_enter_button()
@@ -30,16 +34,47 @@ def test_login():
 
     # TODO Не воспроизводится показ диалога с добавлением доп. адреса электронной почты
 
-    try:
-        assert login.get_title_text_after_password() == \
-               "Добавьте почту. Если потеряете доступ к своему аккаунту, " \
-               "его можно будет проще восстановить с её помощью.", "Page name has changed, " \
-                                                                              "or foreign localization"
-        login.click_skip_button()
-    except Exception as E:
-        print(E)
+    # try:
+    #     assert login.get_title_text_after_password() == \
+    #            "Добавьте почту. Если потеряете доступ к своему аккаунту, " \
+    #            "его можно будет проще восстановить с её помощью.", "Page name has changed, " \
+    #                                                                           "or foreign localization"
+    #     login.click_skip_button()
+    # except Exception as E:
+    #     print(E)
 
     assert login.get_title_text_after_password() == "Войдите, чтобы продолжить", "Page name has changed, " \
                                                                               "or foreign localization"
-
     time.sleep(3)
+
+
+# def test_disk():
+    main_page.open_disk()
+    disk_page.click_create_button()
+    disk_page.click_create_folder_button()
+    time.sleep(2)
+    print(disk_page.get_text_from_dialog_title())
+    disk_page.type_title_of_folder()
+    disk_page.click_button_save()
+    time.sleep(3)
+    disk_page.remove_selection()
+    time.sleep(2)
+    disk_page.double_click_on_new_folder()
+    time.sleep(2)
+
+    assert disk_page.get_title_of_new_folder() == TITLE_FOLDER
+
+    disk_page.click_create_button()
+    disk_page.click_create_file()
+    print(disk_page.get_text_from_dialog_title())
+    disk_page.type_title_of_file()
+    disk_page.click_button_save()
+    time.sleep(2)
+    disk_page.close_tab_of_file()
+
+    assert disk_page.get_title_of_new_file() == TITLE_FILE + ".docx"
+
+    time.sleep(10)
+
+
+
