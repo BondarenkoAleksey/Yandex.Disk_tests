@@ -9,7 +9,7 @@ login = LoginPage()
 main_page = MainPage()
 disk_page = DiskPage()
 
-def test_login():
+def test():
     login.open_yaru()
     # time.sleep(2)
     login.click_enter_button()
