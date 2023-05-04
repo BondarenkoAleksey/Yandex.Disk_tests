@@ -50,43 +50,24 @@ class BasePage:
     def get_text(self, locator):
         return self.find_element(locator).text
 
-    def is_element_present(self, how, what):
-        try:
-            driver.find_element(how, what)
-        except NoSuchElementException:
-            print(f"Element {driver.find_element(how, what)} not found")
-            return False
-        return True
-
-    def page_reload(self):
-        driver.refresh()
-
     def execute_script(self, value):
         return driver.execute_script(value)
 
     def click2(self, locator):
         element = self.find_element(locator)
         actions = ActionChains(driver)
-        actions.move_to_element(element)
-        actions.click(element)
-        actions.perform()
-
-    def find_element2(self, how, what, time=25):
-        wait = WebDriverWait(driver, time)
-        return wait.until(EC.presence_of_element_located((how, what)), message=f"Can't find element by locator {locator}")
+        return actions.click(element).perform()
 
     def double_click(self,locator):
         element = self.find_element(locator)
         actions = ActionChains(driver)
         return actions.double_click(element).perform()
 
-    def send_keys_keyboard(self, locator, key):
-        ActionChains(driver).move_to_element(locator).key_down(key).key_up(key).perform()
 
     def close_tab(self):
         pyautogui.keyDown('command')
         pyautogui.press('w')
         pyautogui.keyUp('command')
 
-    def switch_tab(self, handle):
-        driver.switch_to.window(driver.window_handles[handle])
+    def press_key(self, key):
+        pyautogui.press(key)

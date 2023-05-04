@@ -36,11 +36,22 @@ class DiskPage(BasePage):
         self.type_text(DiskPageLocators.FILE_TITLE_INPUT, TITLE_FILE)
 
     def close_tab_of_file(self):
-        time.sleep(5)
+        time.sleep(8)
         self.close_tab()
-
-    def switch_to_disk_tab(self):
-        self.switch_tab(0)
 
     def get_title_of_new_file(self):
         return self.get_text(DiskPageLocators.TITLE_OF_NEW_FILE)
+
+    def logout(self):
+        self.click(DiskPageLocators.AVA_ICON)
+        self.click(DiskPageLocators.LOGOUT_BUTTON)
+
+    def driver_quit(self):
+        driver.quit()
+
+    def delete_test_data(self):
+        self.click2(DiskPageLocators.BACK_BUTTON)
+        time.sleep(0.5)
+        self.click2(DiskPageLocators.FOLDER_BUTTON)
+        time.sleep(0.5)
+        self.press_key("delete")
